@@ -1,18 +1,17 @@
 # Answerfilter
 This script is a solution to search for strings among all responses after a questionnaire is filled/closed and the DB (a .csv file) is available. There is a simple, however yet not solved task: define those respondents who mentioned a specific string anywhere among their answers. So filter for these respondents and make a list about these. 
 
-To be translated: 
-"""Ez a script a kovetkezo celbol keszult: 
-Amikor valaszok vannak egy tablaban, es azt szeretnénk tudni, hogy:
-- egy bizonyos választ ki adott.
-- A válaszokon belül is előfordulhatnak vesszők és az egyes kérdések válaszai is vesszővel elválasztottak. 
-Tábla előkészítése: 
-- Ez a srcipt Ubuntu-n így futtatható: $ python Respfilter_multiple_str_write.py
-- Ez a script és az inputként használt file is ugyanabban a mappában legyen.
-- A válaszadó neve az utolsó oszlopban legyen. 
-Eredmények: 
-- A Terminal-os is láthatók
-- De különben egy hónap-nap-óra-perc-másodperc nevü .txt file-ba is kiexportálja, abba a könyvtárba, ahol futtatunk.
-.csv-re és .txt-re is működik.
+Responses are checked when we meet the next challenge: 
+- who's answer includes a specific string 
+- strings to filter for can be a closed or opened quesion also
+- there could be commas within the answer itself and the DB is structured as Comma Separated file. 
+- it works for .txt and for .csv file also.
 
-"""
+Preparation for the DB: 
+- names (or other identifiers) should be in the last column
+- the input DB should be in the same folder where this .py script is run
+- the spript can run on Ubuntu like this: $ python Respfilter_multiple_str_write.py
+
+Results can be seen: 
+- on the Terminal itself
+- saved in a .txt file, with the following name as reference: month-day-hour-minutes-seconds
