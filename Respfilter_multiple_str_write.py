@@ -1,21 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Ez a script a kovetkezo celbol keszult: 
-Amikor valaszok vannak egy tablaban, es azt szeretnénk tudni, hogy:
-- egy bizonyos választ ki adott.
-- A válaszokon belül is előfordulhatnak vesszők és az egyes kérdések válaszai is vesszővel elválasztottak. 
-Tábla előkészítése: 
-- Ez a srcipt Ubuntu-n így futtatható: $ python Respfilter_multiple_str_write.py
-- Ez a script és az inputként használt file is ugyanabban a mappában legyen.
-- A válaszadó neve az utolsó oszlopban legyen. 
-Eredmények: 
-- A Terminal-os is láthatók
-- De különben egy hónap-nap-óra-perc-másodperc nevü .txt file-ba is kiexportálja, abba a könyvtárba, ahol futtatunk.
-.csv-re és .txt-re is működik.
-
-"""
-
 from datetime import datetime
 nowtime = datetime.now()
 timestampStr = nowtime.strftime(' %m-%d-%H-%M-%S')
@@ -36,13 +21,14 @@ fout = open(timestampStr, 'w')
 fout.write(fname)
 fout.write(timestampStr)
 while filternum > 0:
-#itt jon az a resz, hogy tobb valasz is egyszerre szamlalhato:
-#1-tobb szurest lehetne directory-ban is tarolni, ahol key=filter, value=nevek
+#Here comes the section to allow multiple string to be filtered for.
+#Apart of the solution below a suggestion for more "Pythongic" way: using dictionary, where key=strings to filter for, and value=names fits for the filter
 	filterfor=input ('What should be the text to filter for? ')
 	filterforTitle = '\n' + filterfor + ':\n'
 	fout.write(filterforTitle)
 	namelist_filterfor=[filterfor+':']
-#Aposztrófos szöveggel egyelőre elhasal, valami mód kellene annak vizsgálatára
+#String to be filtered for with apostrophy fails. Solution should be below
+#just toe below: other special characters should be allowed. 
 	specchar = filterfor.find('\'')
 	if specchar >-1:
 		print ('Try a text without aphostrophe!')
@@ -52,7 +38,7 @@ while filternum > 0:
 	for line in fhand:
 		line = line.rstrip()
 		if 'Please indicate your name' in line: continue 
-		#print ('Ezutan valogat a feltetelnek megfelelo sorra')
+		#print ('This is the point where it starts to pharse for each line')
 		if line.find(filterfor) >-1:
 			splitted = line.split(',')
 			splittedStr = ''.join(map(str, splitted[-1:])) + '\n'
